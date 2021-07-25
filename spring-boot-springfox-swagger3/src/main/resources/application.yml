@@ -1,0 +1,14 @@
+server:
+  port: 8012
+
+spring:
+  swagger:
+    enable: true
+    groupName: 前端
+    basePackage: com.lanweihong.springfox.swagger
+    version: 1.0.0
+    title: 前端开发文档
+    description: 开发文档
+    contactName: lanweihong
+    contactEmail: 986310747@qq.com
+    contactUrl: blog.lanweihong.com
