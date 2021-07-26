@@ -1,0 +1,24 @@
+server:
+  port: 8013
+
+springdoc:
+  # 单个分组使用：指定扫描包路径，多个用逗号 "," 隔开，多个分组使用 group-configs
+  # packages-to-scan: com.lanweihong.springdoc.swagger
+  # 单个分组使用：指定包含的路径，多个用逗号 "," 隔开
+  # paths-to-match: /api/**
+  # 分组配置
+  group-configs:
+    - group: All
+      packagesToScan: com.lanweihong.springdoc.swagger.controller
+      pathsToMatch: /api/**
+      # 已在 SwaggerConfig 中配置，为避免重名导致的错误，这里注释掉，两种方法选一种
+#    - group: User
+#      packagesToScan: com.lanweihong.springdoc.swagger.controller.user
+#      pathsToMatch: /api/users/**
+#    - group: Role
+#      packagesToScan: com.lanweihong.springdoc.swagger.controller.role
+#      pathsToMatch: /api/roles/**
+  swagger-ui:
+    enabled: true
+    disable-swagger-default-url: true
+
