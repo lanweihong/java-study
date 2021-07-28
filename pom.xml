@@ -12,6 +12,8 @@
         <module>spring-boot-quartz</module>
         <module>spring-boot-springfox-swagger3</module>
         <module>spring-boot-springdoc-swagger3</module>
+        <module>spring-boot-aop-audit</module>
+        <module>spring-boot-common</module>
     </modules>
 
     <properties>
