@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lanweihong.dao.IFileChunkDao">
+
+    <resultMap id="BaseResultMap" type="com.lanweihong.entity.FileChunkDO">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="version" jdbcType="TINYINT" property="version" />
+        <result column="chunk_number" jdbcType="INTEGER" property="chunkNumber" />
+        <result column="chunk_size" jdbcType="FLOAT" property="chunkSize" />
+        <result column="current_chunk_size" jdbcType="FLOAT" property="currentChunkSize" />
+        <result column="total_chunk" jdbcType="INTEGER" property="totalChunks" />
+        <result column="identifier" jdbcType="VARCHAR" property="identifier" />
+        <result column="file_name" jdbcType="VARCHAR" property="fileName" />
+        <result column="file_type" jdbcType="VARCHAR" property="fileType" />
+        <result column="relative_path" jdbcType="VARCHAR" property="relativePath" />
+        <result column="status" jdbcType="TINYINT" property="status" />
+        <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    </resultMap>
+
+    <sql id="CommonColumn">
+        id, version, status, update_time, add_time
+    </sql>
+
+    <!-- 查询字段类别 -->
+    <sql id="BaseColumnList">
+        <include refid="CommonColumn" />, chunk_number, chunk_size, current_chunk_size, total_chunk, identifier, file_name, file_type, relative_path
+    </sql>
+
+    <select id="listByMd5" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT <include refid="BaseColumnList" /> FROM file_chunk WHERE identifier = #{md5}
+    </select>
+
+    <!-- 批量新增记录 -->
+    <insert id="batchInsert" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO file_chunk(id, chunk_number, chunk_size, current_chunk_size, total_chunk, identifier, file_name, file_type, relative_path, status, add_time)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (
+            #{item.id},
+            #{item.chunkNumber},
+            #{item.chunkSize},
+            #{item.currentChunkSize},
+            #{item.totalChunk},
+            #{item.identifier},
+            #{item.fileName},
+            #{item.fileType},
+            #{item.relativePath},
+            #{item.status},
+            #{item.addTime}
+            )
+        </foreach>
+    </insert>
+
+</mapper>

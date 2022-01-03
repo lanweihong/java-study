@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: spring-boot-file-upload
+  servlet:
+    multipart:
+      max-request-size: 100MB
+      max-file-size: 100MB
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://127.0.0.1:3306/file_upload?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: 1
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+mybatis:
+  mapper-locations: classpath*:mapper/*Mapper.xml
+  type-handlers-package: com.lanweihong.dao
+  check-config-location: true
+  config-location: classpath:mybatis/mybatis-config.xml
+server:
+  port: 8025
