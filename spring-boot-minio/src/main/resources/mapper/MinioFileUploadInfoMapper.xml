@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lanweihong.minio.dao.IMinioFileUploadInfoDao">
+
+    <resultMap id="BaseResultMap" type="com.lanweihong.minio.entity.MinioFileUploadInfoDO">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="total_chunk" jdbcType="INTEGER" property="totalChunk" />
+        <result column="file_md5" jdbcType="VARCHAR" property="fileMd5" />
+        <result column="file_name" jdbcType="VARCHAR" property="fileName" />
+        <result column="file_status" jdbcType="INTEGER" property="fileStatus" />
+        <result column="upload_id" jdbcType="VARCHAR" property="uploadId" />
+        <result column="file_url" jdbcType="VARCHAR" property="fileUrl" />
+        <result column="status" jdbcType="TINYINT" property="status" />
+        <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    </resultMap>
+
+    <sql id="BaseColumnList">
+        id, version,total_chunk, file_md5, file_name, file_status, upload_id, file_url, status, add_time, update_time
+    </sql>
+
+    <select id="getByFileMd5" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT <include refid="BaseColumnList" /> FROM minio_file_upload_info WHERE file_md5 = #{md5} LIMIT 1
+    </select>
+
+</mapper>
